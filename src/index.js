@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Layout from './components/Layout';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import Layout from './components/Layout'
+import registerServiceWorker from './registerServiceWorker'
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
@@ -19,5 +19,5 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Layout />
-  </ApolloProvider>, document.getElementById('root'));
-registerServiceWorker();
+  </ApolloProvider>, document.getElementById('root'))
+registerServiceWorker()
