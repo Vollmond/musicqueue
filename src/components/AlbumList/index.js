@@ -1,9 +1,11 @@
+// @flow
+
 import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-// import Link from './Link'
+import Album from './Album'
 
-const ALL_ALBUMS_QUERY = gql`
+const ALBUMS_QUERY = gql`
   query AllAlbumsQuery {
     allAlbums {
       id
@@ -12,12 +14,34 @@ const ALL_ALBUMS_QUERY = gql`
   }
 `
 
-const AlbumsList = ({ allAlbumsQuery: { allAlbums }}) => {
-  if(allAlbums) {
-    return(<div>{ allAlbums.map(album => <div key={album.id}>{ album.name }</div>) }</div>)
-  } else {
-    return(<div></div>)
+type AlbumType = {
+  id: number,
+  name: string
+}
+
+type Props = {
+  albumsQuery: {
+    loading: boolean,
+    allAlbums: Array<AlbumType>,
+    error?: string
   }
 }
-export default graphql(ALL_ALBUMS_QUERY, { name: 'allAlbumsQuery' })(AlbumsList)
+
+const AlbumsList = (props: Props) => {
+  const { albumsQuery } = props
+  if(albumsQuery.loading === true) {
+    return(<div>...loading...</div>)
+  } else if(!!albumsQuery.error) {
+    return(<div>{ albumsQuery.error }</div>)
+  }
+  const { allAlbums } = albumsQuery
+  return(
+    <div>
+      {
+        allAlbums.map(album => <Album key={ album.id } name={ album.name } id={ album.id } />)
+      }
+    </div>
+  )
+}
+export default graphql(ALBUMS_QUERY, { name: 'albumsQuery' })(AlbumsList)
 
