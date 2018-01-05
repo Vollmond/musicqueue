@@ -4,6 +4,7 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Album from './Album'
+import AlbumForm from './AlbumForm'
 
 const ALBUMS_QUERY = gql`
   query AllAlbumsQuery {
@@ -37,6 +38,7 @@ const AlbumsList = (props: Props) => {
   const { allAlbums } = albumsQuery
   return(
     <div>
+      <AlbumForm />
       {
         allAlbums.map(album => <Album key={ album.id } name={ album.name } id={ album.id } />)
       }
