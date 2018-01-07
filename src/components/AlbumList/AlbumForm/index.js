@@ -3,6 +3,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { MutationFunc } from 'react-apollo/types'
 
 const CREATE_QUERY = gql(`
   mutation createAlbumMutation($name: String!) {
