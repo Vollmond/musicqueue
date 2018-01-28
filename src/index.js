@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -16,8 +18,18 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
+function getRoot() {
+  const root = document.getElementById('root')
+  if (root == null) {
+    throw new Error('No root element, you ruined everything!')
+  }
+  return root
+}
+
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Layout />
-  </ApolloProvider>, document.getElementById('root'))
+  </ApolloProvider>,
+  getRoot()
+)
 registerServiceWorker()
