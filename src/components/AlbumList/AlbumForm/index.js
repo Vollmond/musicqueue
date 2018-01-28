@@ -1,9 +1,9 @@
 // @flow
 
-import React from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
-import { MutationFunc } from 'react-apollo/types'
+import React from "react"
+import { graphql } from "react-apollo"
+import gql from "graphql-tag"
+import { MutationFunc } from "react-apollo/types"
 
 const CREATE_QUERY = gql(`
   mutation createAlbumMutation($name: String!) {
@@ -24,7 +24,7 @@ type State = {
 
 class AlbumForm extends React.Component<Props, State> {
   state = {
-    name: ''
+    name: ""
   }
 
   _setName = (e: SyntheticInputEvent<HTMLInputElement>) => {
@@ -41,15 +41,17 @@ class AlbumForm extends React.Component<Props, State> {
   }
 
   render() {
-    return(
+    return (
       <div>
-        <div><input value={ this.state.name } onChange= { this._setName } /></div>
         <div>
-          <button onClick={ this._createAlbum } >Добавить</button>
+          <input value={this.state.name} onChange={this._setName} />
+        </div>
+        <div>
+          <button onClick={this._createAlbum}>Добавить</button>
         </div>
       </div>
     )
   }
 }
 
-export default graphql(CREATE_QUERY, { name: 'createAlbumMutation' })(AlbumForm)
+export default graphql(CREATE_QUERY, { name: "createAlbumMutation" })(AlbumForm)

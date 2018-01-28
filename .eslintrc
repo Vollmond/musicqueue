@@ -1,6 +1,10 @@
 {
   "extends": "react-app",
   "rules": {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "flowtype/require-valid-file-annotation": ["error", "always"]
+  },
+  "env": {
+    "jest": true
   }
 }
