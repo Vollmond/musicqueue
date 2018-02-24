@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Album from './Album'
 import AlbumForm from './AlbumForm'
+import SpotifyClient from '../../helpers/spotifyClient'
 
 const ALBUMS_QUERY = gql`
   query AllAlbumsQuery {
@@ -30,6 +31,8 @@ type Props = {
 
 const AlbumsList = (props: Props) => {
   const { albumsQuery } = props
+  const spotifyClient = new SpotifyClient()
+  spotifyClient.getToken()
   if(albumsQuery.loading === true) {
     return(<div>...loading...</div>)
   } else if(!!albumsQuery.error) {
