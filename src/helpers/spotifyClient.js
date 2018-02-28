@@ -1,6 +1,7 @@
 // @flow
 
 import axios, { type Axios } from 'axios'
+import qs from 'querystring'
 
 type spotifyRecord = {}
 
@@ -10,7 +11,7 @@ type spotifyToken = {
 }
 
 class SpotifyClient {
-  _host = 'https://accounts.spotify.com/api/'
+  _host = '/spotify-api'
   _secret: string
   _clientId: string
   _spotifyToken: spotifyToken
@@ -33,22 +34,18 @@ class SpotifyClient {
 
   spotifyToken: spotifyToken
 
-
   getToken: () => spotifyToken = () => {
-    this._axios.post(
-      'token',
-      { grant_type: this._clientId },
-      {
+    this._axios
+      .post('token', qs.stringify({ grant_type: 'client_credentials' }), {
         headers: {
           Authorization: `Basic ${btoa(`${this._clientId}:${this._secret}`)}`,
-          'Access-Control-Allow-Origin': '*'
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
-      }
-    )
-    .then(
-      (response) => console.log(response),
-      (err) => console.log(`error: ${err}`)
-    )
+      })
+      .then(
+        response => console.log(response),
+        err => console.log(`error: ${err}`)
+      )
   }
 
   // findRecord: (name: string) => SpotifyRecord = (name) => {
