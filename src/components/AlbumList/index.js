@@ -31,22 +31,21 @@ type Props = {
 
 const AlbumsList = (props: Props) => {
   const { albumsQuery } = props
-  const spotifyClient = new SpotifyClient()
-  spotifyClient.getToken()
-  if(albumsQuery.loading === true) {
-    return(<div>...loading...</div>)
-  } else if(!!albumsQuery.error) {
-    return(<div>{ albumsQuery.error }</div>)
+  // const spotifyClient = new SpotifyClient()
+  // spotifyClient.getToken()
+  if (albumsQuery.loading === true) {
+    return <div>...loading...</div>
+  } else if (!!albumsQuery.error) {
+    return <div>{albumsQuery.error}</div>
   }
   const { allAlbums } = albumsQuery
-  return(
+  return (
     <div>
       <AlbumForm />
-      {
-        allAlbums.map(album => <Album key={ album.id } name={ album.name } id={ album.id } />)
-      }
+      {allAlbums.map(album => (
+        <Album key={album.id} name={album.name} id={album.id} />
+      ))}
     </div>
   )
 }
 export default graphql(ALBUMS_QUERY, { name: 'albumsQuery' })(AlbumsList)
-
