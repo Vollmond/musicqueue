@@ -34,18 +34,15 @@ class SpotifyClient {
 
   spotifyToken: spotifyToken
 
-  getToken: () => spotifyToken = () => {
-    this._axios
+  getToken: () => Promise<spotifyToken> = () => {
+    return this._axios
       .post('token', qs.stringify({ grant_type: 'client_credentials' }), {
         headers: {
           Authorization: `Basic ${btoa(`${this._clientId}:${this._secret}`)}`,
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-      .then(
-        response => console.log(response),
-        err => console.log(`error: ${err}`)
-      )
+      .then(({ data }) => data)
   }
 
   // findRecord: (name: string) => SpotifyRecord = (name) => {

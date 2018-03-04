@@ -31,8 +31,6 @@ type Props = {
 
 const AlbumsList = (props: Props) => {
   const { albumsQuery } = props
-  const spotifyClient = new SpotifyClient()
-  spotifyClient.getToken()
   if (albumsQuery.loading === true) {
     return <div>...loading...</div>
   } else if (!!albumsQuery.error) {
